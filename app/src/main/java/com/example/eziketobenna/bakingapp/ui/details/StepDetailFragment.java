@@ -117,7 +117,8 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
             Button mPrevBtn = binding.previousButton;
             mPrevBtn.setOnClickListener(this);
             TextView mStepIndicator = binding.stepId;
-            String currentStep = "Step  " + String.valueOf(stepId);
+            int pageNumber = stepId + 1;
+            String currentStep = getString(R.string.currentStep, pageNumber);
             mStepIndicator.setText(currentStep);
             if (stepId == CURRENT_PAGE_POSITION) {
                 mPrevBtn.setVisibility(View.INVISIBLE);
