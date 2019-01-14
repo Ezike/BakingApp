@@ -85,7 +85,6 @@ public class StepDetailActivity extends AppCompatActivity implements StepDetailF
     @Override
     public void onBackPressed() {
         finish();
-        super.onBackPressed();
     }
 
     @Override
@@ -97,23 +96,27 @@ public class StepDetailActivity extends AppCompatActivity implements StepDetailF
     }
 
     @Override
-    public void onPrevStepClick(Step step) {
-        mCurrentPosition = step.getId();
+    public void onPrevStepClick() {
+        mCurrentPosition = mStep.getId();
         if (mCurrentPosition > 0) {
-            gotoStep(mStepList.get(mCurrentPosition - 1));
+            mCurrentPosition--;
+            gotoStep(mStepList.get(mCurrentPosition));
         } else {
             finish();
         }
+        mStep = mStepList.get(mCurrentPosition);
     }
 
     @Override
-    public void onNextStepClick(Step step) {
-        mCurrentPosition = step.getId();
+    public void onNextStepClick() {
+        mCurrentPosition = mStep.getId();
         if (mCurrentPosition < mStepList.size() - 1) {
-            gotoStep(mStepList.get(mCurrentPosition + 1));
+            mCurrentPosition++;
+            gotoStep(mStepList.get(mCurrentPosition));
         } else {
             finish();
         }
+        mStep = mStepList.get(mCurrentPosition);
     }
 
     private void gotoStep(Step step) {

@@ -151,10 +151,10 @@ public class StepListActivity extends AppCompatActivity implements DetailAdapter
     }
 
     @Override
-    public void onPrevStepClick(Step step) {
+    public void onPrevStepClick() {
     }
 
     @Override
-    public void onNextStepClick(Step step) {
+    public void onNextStepClick() {
     }
 }

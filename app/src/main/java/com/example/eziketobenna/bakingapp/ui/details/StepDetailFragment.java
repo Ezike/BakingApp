@@ -107,18 +107,21 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
         mDescHeaderTv = binding.header;
         isTablet = getResources().getBoolean(R.bool.isTablet);
         orientation = getResources().getConfiguration().orientation;
+
         // If screen is in landscape mode, show video in full screen
         // else show nav buttons and indicator
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             fullScreen();
         } else {
             Button mNextBtn = binding.nextButton;
+            assert mNextBtn != null;
             mNextBtn.setOnClickListener(this);
             Button mPrevBtn = binding.previousButton;
+            assert mPrevBtn != null;
             mPrevBtn.setOnClickListener(this);
             TextView mStepIndicator = binding.stepId;
-            int pageNumber = stepId + 1;
-            String currentStep = getString(R.string.currentStep, pageNumber);
+            String currentStep = getString(R.string.currentStep, stepId);
+            assert mStepIndicator != null;
             mStepIndicator.setText(currentStep);
             if (stepId == CURRENT_PAGE_POSITION) {
                 mPrevBtn.setVisibility(View.INVISIBLE);
@@ -139,10 +142,10 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
         int id = v.getId();
         switch (id) {
             case R.id.next_button:
-                mListener.onNextStepClick(step);
+                mListener.onNextStepClick();
                 break;
             case R.id.previous_button:
-                mListener.onPrevStepClick(step);
+                mListener.onPrevStepClick();
                 break;
         }
     }
@@ -275,8 +278,8 @@ public class StepDetailFragment extends Fragment implements Player.EventListener
      * between individual steps
      */
     public interface OnStepClickListener {
-        void onPrevStepClick(Step step);
+        void onPrevStepClick();
 
-        void onNextStepClick(Step step);
+        void onNextStepClick();
     }
 }
